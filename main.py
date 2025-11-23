@@ -59,7 +59,6 @@ def input_kegiatan():
         if not valid:
             print(f"\nError: {pesan}")
             return None
-
         try:
             mulai = datetime.strptime(waktu_mulai, "%H:%M")
             selesai = datetime.strptime(waktu_selesai, "%H:%M")
@@ -69,7 +68,6 @@ def input_kegiatan():
         except ValueError:
             print("\nError: Format waktu tidak valid!")
             return None
-
         waktu = f"{waktu_mulai}-{waktu_selesai}"
         return Kegiatan(id_kegiatan, tanggal, waktu, nama, tempat, deskripsi)
     except ValueError:
@@ -120,7 +118,6 @@ def menu_tambah_kegiatan(btree):
                 print("\nSudah ada kegiatan pada tanggal dan waktu tersebut!")
                 print("Kegiatan yang ada:")
                 tampilkan_kegiatan(existing)
-                
                 overwrite = input("\nApakah ingin menimpa kegiatan tersebut? (y/n): ").lower()
                 if overwrite != 'y':
                     print("\nPenambahan dibatalkan.")
@@ -150,10 +147,8 @@ def menu_cari_kegiatan(btree):
         print("3. Kembali")
         
         mode = input("\nPilih mode (1-3): ").strip()
-        
         if mode == "3":
             break
-        
         try:
             if mode == "1":
                 print("\n" + "-"*50)
@@ -165,7 +160,6 @@ def menu_cari_kegiatan(btree):
                     nama_hari = format_nama_hari(tanggal)
                     print(f"\nDitemukan {len(kegiatan_hari)} kegiatan pada {tanggal} ({nama_hari}):")
                     print("="*50)
-                    
                     for idx, k in enumerate(kegiatan_hari, 1):
                         tampilkan_kegiatan(k, idx)
                 else:
@@ -177,10 +171,8 @@ def menu_cari_kegiatan(btree):
                 print("\n" + "-"*50)
                 tanggal = input("Tanggal (YYYY-MM-DD): ")
                 waktu = input("Waktu Mulai (HH:MM) : ")
-                
                 key = f"{tanggal} {waktu}"
                 hasil = btree.search(btree.root, key)
-                
                 if hasil:
                     print("\nData Ditemukan!")
                     tampilkan_kegiatan(hasil)
@@ -189,7 +181,6 @@ def menu_cari_kegiatan(btree):
                     lihat_semua = input(f"\nLihat semua kegiatan di tanggal {tanggal}? (y/n): ").lower()
                     if lihat_semua == 'y':
                         kegiatan_hari = cari_kegiatan_by_tanggal(btree, tanggal)
-                        
                         if kegiatan_hari:
                             nama_hari = format_nama_hari(tanggal)
                             print(f"\nKegiatan di tanggal {tanggal} ({nama_hari}):")
@@ -199,7 +190,6 @@ def menu_cari_kegiatan(btree):
                             print(f"\nTidak ada kegiatan di tanggal {tanggal}.")
                 
                 pause()
-            
             else:
                 print("\nPilihan tidak valid!")
                 pause()
@@ -227,7 +217,6 @@ def menu_update_kegiatan(btree):
             print("2. Cari berdasarkan tanggal dan waktu spesifik")
             
             mode = input("\nPilih mode (1-2): ").strip()
-            
             hasil = None
             key_lama = None
             
@@ -246,7 +235,6 @@ def menu_update_kegiatan(btree):
                 for idx, k in enumerate(kegiatan_hari, 1):
                     waktu_display = k.waktu.split('-')[0] if '-' in k.waktu else k.waktu
                     print(f"{idx}. [{waktu_display}] {k.nama}")
-                
                 pilih = input("\nPilih nomor kegiatan yang ingin diupdate: ").strip()
                 try:
                     idx = int(pilih) - 1
@@ -279,7 +267,6 @@ def menu_update_kegiatan(btree):
                 if lagi != 'y':
                     break
                 continue
-            
             print("\nData Lama:")
             tampilkan_kegiatan(hasil)
             
@@ -288,7 +275,6 @@ def menu_update_kegiatan(btree):
                 print("\nUpdate dibatalkan.")
                 pause()
                 break
-            
             print("\n" + "-"*50)
             print("Masukkan data baru:")
             print("-"*50)
@@ -299,11 +285,9 @@ def menu_update_kegiatan(btree):
                 key_baru = kegiatan_baru.get_key()
                 btree.insert(key_baru, kegiatan_baru)
                 Serializer.save_to_json(DATA_FILE, btree)
-                
                 print("\nKegiatan berhasil di-update!")
                 print("\nData Baru:")
                 tampilkan_kegiatan(kegiatan_baru)
-                
                 if key_lama != key_baru:
                     print("\nCatatan: B-Tree delete belum diimplementasi.")
                     print("Data lama masih tersimpan. Silakan hapus manual dari JSON jika perlu.")
@@ -336,17 +320,15 @@ def menu_tampilkan_semua(btree):
     tampilkan_header()
     print("\nSEMUA JADWAL TERURUT")
     print("-"*50)
-    
+
     semua = btree.traverse()
     
     if not semua:
         print("\nBelum ada kegiatan terdaftar.")
     else:
         print(f"\nTotal: {len(semua)} kegiatan\n")
-        
         tanggal_sekarang = None
         nomor = 1
-        
         for key, kegiatan in semua:
             if kegiatan.tanggal != tanggal_sekarang:
                 if tanggal_sekarang is not None:
@@ -355,30 +337,24 @@ def menu_tampilkan_semua(btree):
                 nama_hari = format_nama_hari(tanggal_sekarang)
                 print(f"\n{tanggal_sekarang} ({nama_hari})")
                 print("-"*50)
-            
             if '-' in kegiatan.waktu:
                 waktu_display = kegiatan.waktu.replace('-', ' - ')
             else:
                 waktu_display = kegiatan.waktu
-            
             print(f"\n[{nomor}] {waktu_display}")
             print(f"    {kegiatan.nama}")
             print(f"    {kegiatan.tempat}")
             print(f"    {kegiatan.deskripsi}")
             nomor += 1
-        
         print("\n" + "="*50)
-    
     pause()
 
 def main():
     """Fungsi utama aplikasi"""
     btree = BTree(t=2)
-    
     clear_screen()
     tampilkan_header()
     print("\nMemuat data dari JSON...")
-    
     try:
         Serializer.load_from_json(DATA_FILE, btree)
         print("Data berhasil dimuat!")
@@ -391,30 +367,23 @@ def main():
     except Exception as e:
         print(f"Error saat memuat data: {e}")
         pause()
-    
+
     while True:
         try:
             clear_screen()
             tampilkan_header()
             tampilkan_menu()
-            
             pilihan = input("\nPilih menu (1-6): ").strip()
-            
             if pilihan == "1":
                 menu_tambah_kegiatan(btree)
-                
             elif pilihan == "2":
                 menu_cari_kegiatan(btree)
-                
             elif pilihan == "3":
                 menu_update_kegiatan(btree)
-                
             elif pilihan == "4":
                 menu_hapus_kegiatan(btree)
-                
             elif pilihan == "5":
                 menu_tampilkan_semua(btree)
-                
             elif pilihan == "6":
                 clear_screen()
                 tampilkan_header()
@@ -427,7 +396,6 @@ def main():
             else:
                 print("\nPilihan tidak valid. Silakan pilih 1-6.")
                 pause()
-        
         except KeyboardInterrupt:
             print("\n\nProgram dihentikan oleh user.")
             print("Menyimpan data...")
