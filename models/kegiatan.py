@@ -9,10 +9,13 @@ class Kegiatan:
 
     def get_key(self):
         """
-        Menghasilkan key unik untuk B-Tree
-        Format key: 'YYYY-MM-DD HH:MM'
+        Menghasilkan key untuk B-Tree
+        Key HARUS memakai waktu MULAI saja.
+        Contoh:
+            waktu = "08:00-10:00" --> key = "2025-05-10 08:00"
         """
-        return f"{self.tanggal} {self.waktu}"
+        waktu_mulai = self.waktu.split("-")[0]  # Ambil jam mulai
+        return f"{self.tanggal} {waktu_mulai}"
 
     def to_dict(self):
         """
