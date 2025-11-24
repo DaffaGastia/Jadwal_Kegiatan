@@ -392,14 +392,6 @@
         "deskripsi": "Membaca buku self-development"
     },
     {
-        "id": 50,
-        "tanggal": "2025-05-13",
-        "waktu": "07:00-07:30",
-        "nama": "Sarapan",
-        "tempat": "Rumah",
-        "deskripsi": "Sarapan bubur ayam"
-    },
-    {
         "id": 51,
         "tanggal": "2025-05-13",
         "waktu": "08:00-10:00",
@@ -478,14 +470,6 @@
         "nama": "Sholat Isya",
         "tempat": "Masjid",
         "deskripsi": "Sholat Isya dan tarawih"
-    },
-    {
-        "id": 61,
-        "tanggal": "2025-05-13",
-        "waktu": "20:00-22:00",
-        "nama": "Belajar Python",
-        "tempat": "Kamar",
-        "deskripsi": "Tutorial machine learning dasar"
     },
     {
         "id": 62,
@@ -1186,9 +1170,9 @@
     {
         "id": 150,
         "tanggal": "2025-12-31",
-        "waktu": "20:00-01:00",
-        "nama": "Malam Tahun Baru",
-        "tempat": "Rumah",
-        "deskripsi": "Perayaan tahun baru bersama keluarga"
+        "waktu": "18:00-03:00",
+        "nama": "Bakaran Tahun Baru",
+        "tempat": "Dilapangan Gelora Bersama",
+        "deskripsi": "Melakukan bakaran bersama sama Se-RW"
     }
 ]
