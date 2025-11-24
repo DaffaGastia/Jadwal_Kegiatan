@@ -1174,5 +1174,13 @@
         "nama": "Bakaran Tahun Baru",
         "tempat": "Dilapangan Gelora Bersama",
         "deskripsi": "Melakukan bakaran bersama sama Se-RW"
+    },
+    {
+        "id": 151,
+        "tanggal": "2026-01-11",
+        "waktu": "09:00-14:30",
+        "nama": "Gym",
+        "tempat": "TRY GYM JEMBER",
+        "deskripsi": "LegDay"
     }
 ]
