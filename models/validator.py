@@ -1,7 +1,6 @@
 import datetime
 
 class Validator:
-
     @staticmethod
     def valid_tanggal(tanggal):
         """

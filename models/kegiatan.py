@@ -14,7 +14,7 @@ class Kegiatan:
         Contoh:
             waktu = "08:00-10:00" --> key = "2025-05-10 08:00"
         """
-        waktu_mulai = self.waktu.split("-")[0]  # Ambil jam mulai
+        waktu_mulai = self.waktu.split("-")[0]  
         return f"{self.tanggal} {waktu_mulai}"
 
     def to_dict(self):

@@ -2,7 +2,6 @@ import json
 from models.kegiatan import Kegiatan
 
 class Serializer:
-
     @staticmethod
     def load_from_json(filepath, btree):
         try:
